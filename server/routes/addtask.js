@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
       res.sendStatus(500);
     }
 
-    client.query('SELECT * FROM tasks', function (err, result) {
+    client.query('SELECT * FROM tasks ORDER BY id ASC', function (err, result) {
       done();
 
       console.log(result.rows);
@@ -73,7 +73,15 @@ router.delete('/:id', function (req, res) {
 router.put('/:id', function (req, res) {
   var id = req.params.id;
   var task = req.body.value;
+  if (task == 'true') {
+    task = true;
+  }
+  else {
+    task = false;
+  }
   console.log(req.body);
+  console.log(typeof task);
+  console.log(req.params.id);
 
   pg.connect(connectionString, function (err, client, done) {
     if (err) {

@@ -13,23 +13,20 @@ $(document).ready(function () {
   });
 
 //Function to update selected task on the DOM (complete/incomplete).
-/*$('#container').on('click', '#completed', function() {
+$('#container').on('click', '.completed', function() {
   task = {};
 if ($(this).prop('checked') === true) {
   $(this).val(true);
   task.value = true;
-  $(this).parent().parent().addClass('checked');
 }
 else {
   $(this).val(false);
   task.value = false;
-  $(this).parent().parent().removeClass('checked');
 }
 console.log($(this).val());
 console.log(task);
-});*/
-
-$('#container').on('click', '#completed', updateTask);
+updateTask($(this));
+});
 
 });
 
@@ -65,12 +62,22 @@ function getTasks() {
     url: '/addtask',
     success: function (tasks) {
       $('#container').empty();
+      console.log(tasks);
       tasks.forEach(function (task) {
-      $separator = $('<div></div>');
-      $separator.data('taskID', task.id);
-      var $el = $('<form id="checkbox"><input type="checkbox" id ="completed" value=false name="completed" /></form>' + '<p>' + task.task + '</p>' + '<button type="button" class="delete" name="delete">Delete</button>');
-      $separator.append($el);
-      $('#container').append($separator);
+        console.log(task.id);
+        if (task.completed === true) {
+          $separator = $('<div class = checked></div>');
+          $separator.data('taskID', task.id);
+          var $el = $('<form id="checkbox"><input type="checkbox" class ="completed checked" value=true name="completed" checked/></form>' + '<p>' + task.task + '</p>' + '<button type="button" class="delete" name="delete">Delete</button>');
+          $separator.append($el);
+          $('#container').append($separator);
+        } else {
+          $separator = $('<div></div>');
+          $separator.data('taskID', task.id);
+          var $le = $('<form id="checkbox"><input type="checkbox" class ="completed" value=false name="completed" /></form>' + '<p>' + task.task + '</p>' + '<button type="button" class="delete" name="delete">Delete</button>');
+          $separator.append($le);
+          $('#container').append($separator);
+        }
       });
     },
   });
@@ -99,31 +106,25 @@ function deleteTask(event) {
 }
 
 //Updates task completion to the database.
-function updateTask() {
-  event.preventDefault();
-  task = {};
-  if ($(this).prop('checked') === true) {
-    $(this).val(true);
-    task.value = true;
-    $(this).addClass('checked');
-  }
-  else {
-    $(this).val(false);
-    task.value = false;
-    $(this).removeClass('checked');
-  }
-  console.log($(this).val());
-  console.log(task);
+function updateTask(checkbox) {
+  // event.preventDefault();
+  task = {
+    value : checkbox.val()
+  };
 
-  var taskID = $(this).parent().parent().data('taskID');
+  var taskID = checkbox.parent().parent().data('taskID');
+  console.log(checkbox);
+  console.log(checkbox.parent());
+  console.log(checkbox.parent().parent());
   console.log('getTaskID', taskID);
 
   $.ajax({
     type: 'PUT',
     url: '/addtask/' + taskID,
     data: task,
-    success: function () {
-      getTasks();
+    success: function (response) {
+      console.log(response);
+     getTasks();
     },
   });
 }
