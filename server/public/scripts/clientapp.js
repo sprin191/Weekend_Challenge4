@@ -60,21 +60,32 @@ function getTasks() {
     url: '/addtask',
     success: function (tasks) {
       $('#container').empty();
+      console.log(tasks.length);
+      var numCompleted = [];
       tasks.forEach(function (task) {
         if (task.completed === true) {
-          $separator = $('<div class = checked></div>');
+          numCompleted.push(task.completed);
+          $separator = $('<div class = "box checked"></div>');
           $separator.data('taskID', task.id);
           var $el = $('<form id="checkbox"><input type="checkbox" class ="completed" value=true name="completed" checked/></form>' + '<p>' + task.task + '</p>' + '<button type="button" class="delete" name="delete">Delete</button>');
           $separator.append($el);
           $('#container').append($separator);
         } else {
-          $separator = $('<div></div>');
+          $separator = $('<div class = "box"></div>');
           $separator.data('taskID', task.id);
           var $le = $('<form id="checkbox"><input type="checkbox" class ="completed" value=false name="completed" /></form>' + '<p>' + task.task + '</p>' + '<button type="button" class="delete" name="delete">Delete</button>');
           $separator.append($le);
           $('#container').append($separator);
         }
       });
+      console.log(numCompleted);
+      if (numCompleted.length === tasks.length) {
+        $('#container').addClass('praiseTheSun');
+      }
+      else {
+        console.log("yo");
+        $('#container').removeClass('praiseTheSun');
+      }
     },
   });
 }
