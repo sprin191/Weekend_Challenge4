@@ -23,8 +23,6 @@ else {
   $(this).val(false);
   task.value = false;
 }
-console.log($(this).val());
-console.log(task);
 updateTask($(this));
 });
 
@@ -62,9 +60,7 @@ function getTasks() {
     url: '/addtask',
     success: function (tasks) {
       $('#container').empty();
-      console.log(tasks);
       tasks.forEach(function (task) {
-        console.log(task.id);
         if (task.completed === true) {
           $separator = $('<div class = checked></div>');
           $separator.data('taskID', task.id);
@@ -113,10 +109,6 @@ function updateTask(checkbox) {
   };
 
   var taskID = checkbox.parent().parent().data('taskID');
-  console.log(checkbox);
-  console.log(checkbox.parent());
-  console.log(checkbox.parent().parent());
-  console.log('getTaskID', taskID);
 
   $.ajax({
     type: 'PUT',

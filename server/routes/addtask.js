@@ -79,13 +79,9 @@ router.put('/:id', function (req, res) {
   else {
     task = false;
   }
-  console.log(req.body);
-  console.log(typeof task);
-  console.log(req.params.id);
 
   pg.connect(connectionString, function (err, client, done) {
     if (err) {
-      console.log("connect");
       res.sendStatus(500);
     }
 
@@ -95,7 +91,6 @@ router.put('/:id', function (req, res) {
 
                    if (err) {
                      res.sendStatus(500);
-                     console.log("query");
                      return;
                    }
 
