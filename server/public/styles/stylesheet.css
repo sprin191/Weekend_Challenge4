@@ -12,7 +12,7 @@ body {
   padding-top: 50px;
 }
 
-.delete, p, #checkbox, .checked {
+.delete, p, #checkbox {
   display: inline-block;
   padding-right: 5px;
 }
@@ -20,4 +20,8 @@ body {
 .checked {
   font-style: italic;
   opacity: 0.50;
+}
+
+.praiseTheSun {
+  background-image: url('/images/xZ2sEbd.gif');
 }

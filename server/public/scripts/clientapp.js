@@ -64,7 +64,7 @@ function getTasks() {
         if (task.completed === true) {
           $separator = $('<div class = checked></div>');
           $separator.data('taskID', task.id);
-          var $el = $('<form id="checkbox"><input type="checkbox" class ="completed checked" value=true name="completed" checked/></form>' + '<p>' + task.task + '</p>' + '<button type="button" class="delete" name="delete">Delete</button>');
+          var $el = $('<form id="checkbox"><input type="checkbox" class ="completed" value=true name="completed" checked/></form>' + '<p>' + task.task + '</p>' + '<button type="button" class="delete" name="delete">Delete</button>');
           $separator.append($el);
           $('#container').append($separator);
         } else {
