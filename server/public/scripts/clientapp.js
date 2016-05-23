@@ -6,10 +6,13 @@ $(document).ready(function () {
 
 //Function to delete selected task on the DOM.
   $('#container').on('click', '.delete', function () {
+    var confirmation = confirm("Are you sure you want to delete this task?");
+    if (confirmation === true) {
     var taskID = getTaskID($(this));
     deleteTask(taskID);
     $(this).closest('div').remove();
     console.log('Deleted');
+  }
   });
 
 //Function to update selected task on the DOM (complete/incomplete).
