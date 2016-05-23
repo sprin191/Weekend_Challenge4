@@ -13,7 +13,7 @@ $(document).ready(function () {
   });
 
 //Function to update selected task on the DOM (complete/incomplete).
-$('#container').on('click', '#completed', function() {
+/*$('#container').on('click', '#completed', function() {
   task = {};
 if ($(this).prop('checked') === true) {
   $(this).val(true);
@@ -27,7 +27,9 @@ else {
 }
 console.log($(this).val());
 console.log(task);
-});
+});*/
+
+$('#container').on('click', '#completed', updateTask);
 
 });
 
@@ -56,6 +58,7 @@ function postTask() {
 
 //Gets tasks from the database and appends them to the DOM.
 function getTasks() {
+  event.preventDefault();
   console.log('getting tasks');
   $.ajax({
     type: 'GET',
@@ -96,7 +99,7 @@ function deleteTask(event) {
 }
 
 //Updates task completion to the database.
-/*function updateTask() {
+function updateTask() {
   event.preventDefault();
   task = {};
   if ($(this).prop('checked') === true) {
@@ -123,4 +126,4 @@ function deleteTask(event) {
       getTasks();
     },
   });
-}*/
+}

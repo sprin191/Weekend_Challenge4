@@ -70,28 +70,30 @@ router.delete('/:id', function (req, res) {
   });
 });
 
-/*router.put('/:id', function (req, res) {
+router.put('/:id', function (req, res) {
   var id = req.params.id;
   var task = req.body.value;
   console.log(req.body);
 
   pg.connect(connectionString, function (err, client, done) {
     if (err) {
+      console.log("connect");
       res.sendStatus(500);
     }
 
-    client.query('UPDATE tasks SET completed = $1, WHERE id = $2',[task, id],
+    client.query('UPDATE tasks SET completed = $1 WHERE id = $2',[task, id],
                  function (err, result) {
                    done();
 
                    if (err) {
                      res.sendStatus(500);
+                     console.log("query");
                      return;
                    }
 
                    res.sendStatus(200);
                  });
   });
-});*/
+});
 
 module.exports = router;
