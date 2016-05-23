@@ -80,11 +80,10 @@ function getTasks() {
       });
       console.log(numCompleted);
       if (numCompleted.length === tasks.length) {
-        $('#container').addClass('praiseTheSun');
+        $('body').addClass('praiseTheSun');
       }
       else {
-        console.log("yo");
-        $('#container').removeClass('praiseTheSun');
+        $('body').removeClass('praiseTheSun');
       }
     },
   });
