@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'PT Serif', serif;
+    src: url(fonts.googleapis.com/css?family=PT+Serif);
+}
+
+body {
+  margin: 20px;
+  font-family: 'PT Serif';
+}
+
+#allTasks {
+  padding-top: 50px;
+}
+
+.delete, p, #checkbox, .checked {
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.checked {
+  font-style: italic;
+  opacity: 0.50;
+}
